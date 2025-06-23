@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk4rs7wc0uf50"]
+
+[ext_resource type="Script" uid="uid://bg42dayg1fl1h" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="Gradient" id="Gradient_onrkg"]
+offsets = PackedFloat32Array(0.422078)
+colors = PackedColorArray(0.447059, 0.486275, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
+gradient = SubResource("Gradient_onrkg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(100, 96)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(50, 49)
+scale = Vector2(1.5625, 1.5)
+texture = SubResource("GradientTexture2D_i3pqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="DirectionDashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="DirectionDashTimer" to="." method="_on_direction_dash_timer_timeout"]
