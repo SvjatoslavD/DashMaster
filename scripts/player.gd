@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const DASH_SPEED = 600.0
+const SPEED = 100.0
+const DASH_SPEED = 650.0
 var DASHING = false
 	
 func _physics_process(delta: float) -> void:
@@ -9,13 +9,10 @@ func _physics_process(delta: float) -> void:
 
 	# Add the gravity.
 	if !is_on_floor() and !DASHING:
-		velocity += get_gravity() * delta
+		velocity.y += get_gravity().y * delta
 
 	if (!DASHING):
-		pass
-		#velocity.y = clamp(velocity.y, -1000, 1000)
-		#velocity.x = clamp(velocity.x, -1000, 1000)
-		#velocity.x = move_toward(velocity.x, 0, 10) # Also would affect the speed of acceleration
+		velocity.x = move_toward(velocity.x, 0, 20) # Also would affect the speed of acceleration
 
 	move_and_slide()
 
@@ -26,11 +23,11 @@ func get_input(delta : float) -> void:
 	# Ground movement
 	if (is_on_floor()):
 		if Input.is_action_pressed("key_right"): 
-			velocity.x += SPEED * delta
+			velocity.x = SPEED
 		if Input.is_action_pressed("key_left"): 
-			velocity.x -= SPEED * delta
+			velocity.x = -SPEED
 		if Input.is_action_just_pressed("key_up"): 
-			velocity.y -= DASH_SPEED * delta
+			velocity.y -= DASH_SPEED/2
 			$DirectionDashTimer.start()
 			DASHING = true
 		
@@ -55,6 +52,5 @@ func get_input(delta : float) -> void:
 		
 	# Cancel all movement with space
 	if Input.is_action_just_pressed("key_space"):
-		velocity = Vector2.ZERO
-	
+		velocity = Vector2.ZERO	
 	

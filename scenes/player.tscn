@@ -9,10 +9,10 @@ colors = PackedColorArray(0.447059, 0.486275, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
 gradient = SubResource("Gradient_onrkg")
 width = 8
-height = 8
+height = 12
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
-size = Vector2(8, 8)
+size = Vector2(8, 12)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4flbx")
