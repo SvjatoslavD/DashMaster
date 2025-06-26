@@ -27,4 +27,9 @@ shape = SubResource("RectangleShape2D_hqtel")
 wait_time = 0.2
 one_shot = true
 
+[node name="DirectionDashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="timeout" from="DirectionDashTimer" to="." method="_on_direction_dash_timer_timeout"]
+[connection signal="timeout" from="DirectionDashCooldownTimer" to="." method="_on_direction_dash_cooldown_timer_timeout"]
