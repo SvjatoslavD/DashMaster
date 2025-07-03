@@ -12,7 +12,7 @@ width = 8
 height = 12
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
-radius = 4.0
+radius = 3.9
 height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -25,7 +25,7 @@ texture = SubResource("GradientTexture2D_i3pqv")
 shape = SubResource("CapsuleShape2D_3vyb7")
 
 [node name="KDashTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.3
 one_shot = true
 
 [node name="MDashTimer" type="Timer" parent="."]
@@ -35,6 +35,9 @@ one_shot = true
 [node name="KDashCdTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
 
 [connection signal="timeout" from="KDashTimer" to="." method="_on_k_dash_timer_timeout"]
 [connection signal="timeout" from="MDashTimer" to="." method="_on_m_dash_timer_timeout"]
