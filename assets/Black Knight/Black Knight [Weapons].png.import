@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e71uwx23683t"
-path="res://.godot/imported/Background.png-6d72d35f07f42b3845e8764c552bb4fb.ctex"
+uid="uid://c8a6p4pm1iokr"
+path="res://.godot/imported/Black Knight [Weapons].png-530c4cdcb70d1a7498fff09f32878fa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background.png"
-dest_files=["res://.godot/imported/Background.png-6d72d35f07f42b3845e8764c552bb4fb.ctex"]
+source_file="res://assets/Black Knight/Black Knight [Weapons].png"
+dest_files=["res://.godot/imported/Black Knight [Weapons].png-530c4cdcb70d1a7498fff09f32878fa8.ctex"]
 
 [params]
 

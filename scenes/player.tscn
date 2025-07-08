@@ -1,44 +1,161 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk4rs7wc0uf50"]
+[gd_scene load_steps=17 format=3 uid="uid://dk4rs7wc0uf50"]
 
 [ext_resource type="Script" uid="uid://b6ligyfhy8c8v" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://c75haym8gv4an" path="res://assets/Black Knight/Black Knight.png" id="2_g2els"]
 
-[sub_resource type="Gradient" id="Gradient_onrkg"]
-offsets = PackedFloat32Array(0.422078)
-colors = PackedColorArray(0.447059, 0.486275, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_g2els")
+region = Rect2(1, 49, 23, 23)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
-gradient = SubResource("Gradient_onrkg")
-width = 8
-height = 12
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(1, 1, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_g2els")
+region = Rect2(25, 1, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_g2els")
+region = Rect2(49, 1, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_g2els")
+region = Rect2(73, 1, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_g2els")
+region = Rect2(97, 25, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_g2els")
+region = Rect2(121, 25, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_g2els")
+region = Rect2(145, 25, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_g2els")
+region = Rect2(169, 25, 23, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjrip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": true,
+"name": &"Dashing",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 8.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
-radius = 3.9
-height = 12.0
+radius = 3.0
+height = 10.0
+
+[sub_resource type="Animation" id="Animation_g2els"]
+resource_name = "Dash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Dashing"]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Dashing"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"Dash": SubResource("Animation_g2els"),
+&"RESET": SubResource("Animation_qhqgy")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3vyb7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_i3pqv")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_fjrip")
+animation = &"Dashing"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
 shape = SubResource("CapsuleShape2D_3vyb7")
 
-[node name="KDashTimer" type="Timer" parent="."]
+[node name="DirDashTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
-[node name="MDashTimer" type="Timer" parent="."]
+[node name="LongDashTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
-[node name="KDashCdTimer" type="Timer" parent="."]
+[node name="DirDashCdTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dqkch")
+}
 
-[connection signal="timeout" from="KDashTimer" to="." method="_on_k_dash_timer_timeout"]
-[connection signal="timeout" from="MDashTimer" to="." method="_on_m_dash_timer_timeout"]
-[connection signal="timeout" from="KDashCdTimer" to="." method="_on_k_dash_cd_timer_timeout"]
+[connection signal="timeout" from="DirDashTimer" to="." method="_on_dir_dash_timer_timeout"]
+[connection signal="timeout" from="LongDashTimer" to="." method="_on_long_dash_timer_timeout"]
+[connection signal="timeout" from="DirDashCdTimer" to="." method="_on_dir_dash_cd_timer_timeout"]

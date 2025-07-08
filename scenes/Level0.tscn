@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv3fe858eget"]
+
+[ext_resource type="PackedScene" uid="uid://mamokd4uvahm" path="res://scenes/test_level.tscn" id="1_nkg6q"]
+[ext_resource type="PackedScene" uid="uid://dk4rs7wc0uf50" path="res://scenes/player.tscn" id="2_sdi4c"]
+
+[node name="Level0" type="Node2D"]
+
+[node name="TestLevel" parent="." instance=ExtResource("1_nkg6q")]
+position = Vector2(-2, 2)
+
+[node name="Player" parent="." instance=ExtResource("2_sdi4c")]
+position = Vector2(89, -59)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -1)
+zoom = Vector2(5, 5)
+limit_left = 0
+limit_top = -366
+limit_right = 966
+limit_bottom = 0
